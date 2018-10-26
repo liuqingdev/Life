@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/main_drawer"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lq.life.activity.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/dark_text">
+
+            <ImageView
+                android:id="@+id/menu_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="8dp"
+                android:src="@mipmap/menu" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="简单生活"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+
+        <RadioGroup
+            android:id="@+id/main_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/main_first_rb"
+                style="@style/CommonRadioButton"
+                android:checked="true"
+                android:drawableTop="@drawable/home_selector"
+                android:text="主页" />
+
+            <RadioButton
+                android:id="@+id/main_second_rb"
+                style="@style/CommonRadioButton"
+                android:drawableTop="@drawable/bell_selector"
+                android:text="通知" />
+
+            <RadioButton
+                android:id="@+id/main_third_rb"
+                style="@style/CommonRadioButton"
+                android:drawableTop="@drawable/honor_selector"
+                android:text="成就" />
+
+            <RadioButton
+                android:id="@+id/main_four_rb"
+                style="@style/CommonRadioButton"
+                android:drawableTop="@drawable/user_selector"
+                android:text="用户" />
+        </RadioGroup>
+    </RelativeLayout>
+    <include layout="@layout/slidemenu_left"/>
+
+
+</android.support.v4.widget.DrawerLayout>
