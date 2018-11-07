@@ -13,6 +13,7 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/rlay_head_MainActivity"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_alignParentTop="true"
@@ -34,12 +35,24 @@
                 android:textColor="@color/white"
                 android:textSize="18sp" />
         </RelativeLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager_MainActivity"
+            android:layout_above="@id/main_rg"
+            android:layout_below="@id/rlay_head_MainActivity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v4.view.ViewPager>
 
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@id/main_rg"
+            android:background="@color/default_list_divider"></View>
         <RadioGroup
             android:id="@+id/main_rg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="3dp"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 
@@ -47,13 +60,13 @@
                 android:id="@+id/main_first_rb"
                 style="@style/CommonRadioButton"
                 android:checked="true"
-                android:drawableTop="@drawable/home_selector"
+                android:drawableTop="@drawable/movie_selector"
                 android:text="主页" />
 
             <RadioButton
                 android:id="@+id/main_second_rb"
                 style="@style/CommonRadioButton"
-                android:drawableTop="@drawable/bell_selector"
+                android:drawableTop="@drawable/music_selector"
                 android:text="通知" />
 
             <RadioButton

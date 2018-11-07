@@ -3,6 +3,11 @@ package com.lq.life.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -10,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -19,6 +25,9 @@ import android.widget.TextView;
 
 import com.lq.life.R;
 import com.lq.life.UI.BaseToast;
+import com.lq.life.adapter.FragmentAdapter;
+import com.lq.life.adapter.SettingAdapter;
+import com.lq.life.fragment.MainFragment;
 import com.lq.life.model.Setting;
 import com.lq.life.model.Katong;
 import com.lq.life.utils.BaseActivity;
@@ -46,6 +55,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private TextView nameTv;
     private RelativeLayout menu_rela;
     private ImageView backImg;
+    private ViewPager pagerMain;
+    private List<Fragment> fragmentList = new ArrayList<>();
+
 
     public static final int REQUEST_CODE_THEME = 100;
 
@@ -61,6 +73,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private void initData() {
         settingList.add(new Setting(R.mipmap.skin,"更换头像"));
         katong = new Katong(R.mipmap.d3,"闪电侠",14);
+        fragmentList.add(new MainFragment());
     }
 
     private void initView() {
@@ -79,7 +92,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         drawerLayout = findViewById(R.id.main_drawer);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         setListView = findViewById(R.id.function_listview);
-        settingAdapter = new SettingAdapter();
+        settingAdapter = new SettingAdapter(settingList);
         setListView.setAdapter(settingAdapter);
         setListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,9 +101,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 startActivityForResult(intent,REQUEST_CODE_THEME);
             }
         });
-
         powerLinear = findViewById(R.id.power_linear);
         CountPower(katong);
+        //加载电影recycler
+        pagerMain = findViewById(R.id.pager_MainActivity);
+        FragmentManager fm = getSupportFragmentManager();
+        pagerMain.setAdapter(new FragmentAdapter(fm,fragmentList));
+
     }
 
     @Override
@@ -120,6 +137,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             }
         });
     }
+
+
 
     private void CountPower(Katong kt){
         logoImg.setImageResource(kt.getLogo());
@@ -153,36 +172,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
 
-    private class SettingAdapter extends BaseAdapter{
-
-        @Override
-        public int getCount() {
-            return settingList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return settingList.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = LayoutInflater.from(context).inflate(R.layout.slide_menu_item, parent, false);
-            }
-            ImageView leftImg = CommonViewHolder.get(convertView, R.id.left_img);
-            TextView rightTxt = CommonViewHolder.get(convertView, R.id.right_text);
-            Setting setting = settingList.get(position);
-            leftImg.setImageResource(setting.getImgId());
-            rightTxt.setText(setting.getDescrition());
-            return convertView;
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
