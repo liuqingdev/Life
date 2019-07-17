@@ -42,7 +42,7 @@ public class ThemeActivity extends BaseActivity {
         ktList.add(new Katong(R.mipmap.d4,"幻视",64));
         ktList.add(new Katong(R.mipmap.d5,"X超人",19));
         ktList.add(new Katong(R.mipmap.d6,"雷神",6));
-        ktList.add(new Katong(R.mipmap.d8,"路灯侠",25));
+        ktList.add(new Katong(R.mipmap.d8,"路灯侠",35));
     }
 
     private void initView(){
